@@ -1,0 +1,1024 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مفاجاة بسيطة للملكة روان ♡</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap');
+
+:root {
+    --pink: #f5b8d0;
+    --deep: #a64e80;
+    --purple: #765b9d;
+    --gold: #e7c58a;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    background: #170f27;
+    color: white;
+    font-family: 'Cairo', sans-serif;
+    overflow-x: hidden;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+}
+
+#stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    color: #fff0bd;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: .2; transform: scale(.7); }
+    to { opacity: 1; transform: scale(1.3); }
+}
+
+.screen {
+    display: none;
+    min-height: 100vh;
+    padding: 35px 20px;
+    position: relative;
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    animation: appear .8s ease;
+}
+
+.screen.active {
+    display: flex;
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.container {
+    width: 100%;
+    max-width: 750px;
+    margin: auto;
+}
+
+.eyebrow {
+    color: var(--gold);
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: clamp(32px, 7vw, 58px);
+    line-height: 1.5;
+    margin: 15px 0;
+}
+
+.gradient {
+    background: linear-gradient(90deg, #ffbad7, #ffe8bd, #c5a8f5);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+p {
+    line-height: 2.2;
+    color: #e8dbea;
+    font-size: 16px;
+}
+
+.main-button {
+    margin-top: 30px;
+    padding: 14px 35px;
+    border-radius: 50px;
+    background: linear-gradient(120deg, #f4b5d1, #d49bdc);
+    color: #381c3b;
+    font-size: 16px;
+    font-weight: 800;
+    box-shadow: 0 0 30px #e9a8d555;
+    transition: .3s;
+}
+
+.main-button:hover {
+    transform: translateY(-5px) scale(1.04);
+    box-shadow: 0 0 40px #e9a8d999;
+}
+
+.heart {
+    font-size: 65px;
+    margin: 20px;
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+.glass {
+    background: linear-gradient(145deg, #ffffff16, #ffffff08);
+    border: 1px solid #ffffff25;
+    backdrop-filter: blur(15px);
+    border-radius: 28px;
+    padding: 35px 25px;
+    box-shadow: 0 20px 70px #0003;
+}
+
+.message-card {
+    max-width: 600px;
+    margin: 25px auto;
+}
+
+.message-card p {
+    font-size: 17px;
+}
+
+/* الأزرار والاختبار */
+
+.choices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.choice {
+    padding: 18px 10px;
+    border-radius: 18px;
+    background: #ffffff12;
+    color: white;
+    border: 1px solid #ffffff30;
+    font-size: 15px;
+    transition: .25s;
+}
+
+.choice:hover {
+    background: #dba3c733;
+    transform: translateY(-4px);
+}
+
+#gameResult {
+    margin-top: 25px;
+    color: #ffd9a5;
+    font-weight: bold;
+    min-height: 35px;
+}
+
+/* الهدايا */
+
+.gifts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 30px;
+}
+
+.gift {
+    background: #ffffff12;
+    border: 1px solid #ffffff35;
+    border-radius: 22px;
+    padding: 25px 8px;
+    color: white;
+    transition: .3s;
+}
+
+.gift:hover {
+    transform: translateY(-8px) rotate(-2deg);
+    background: #ffffff22;
+}
+
+.gift span {
+    display: block;
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.gift p {
+    font-size: 13px;
+}
+
+/* صفحات الهدايا */
+
+.gift-page {
+    display: none;
+    min-height: 100vh;
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    text-align: center;
+    animation: appear .7s ease;
+}
+
+.gift-page.active {
+    display: flex;
+}
+
+.back-button {
+    position: absolute;
+    top: 22px;
+    right: 20px;
+    z-index: 30;
+    background: #ffffff25;
+    color: white;
+    border: 1px solid #ffffff55;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 14px;
+}
+
+/* هدية الحب */
+
+#lovePage {
+    background:
+    radial-gradient(circle at center, #e98ab5, #a54e88, #421c4e);
+}
+
+.love-heart {
+    position: absolute;
+    bottom: -60px;
+    animation: heartFly linear infinite;
+    pointer-events: none;
+}
+
+@keyframes heartFly {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(.6);
+        opacity: 0;
+    }
+    15% { opacity: 1; }
+    100% {
+        transform: translateY(-115vh) rotate(360deg) scale(1.4);
+        opacity: 0;
+    }
+}
+
+.love-center {
+    position: relative;
+    z-index: 3;
+    font-size: clamp(70px, 15vw, 130px);
+    animation: heartbeat 1.3s infinite;
+    filter: drop-shadow(0 0 30px #ffb7d9);
+}
+
+/* هدية الثقة - فهد وروان */
+
+#confidencePage {
+    background:
+    radial-gradient(circle at top, #8b548d, transparent 50%),
+    linear-gradient(135deg, #24152f, #4a234d, #1a1431);
+}
+
+.couple-box {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: 600px;
+    padding: 40px 20px;
+    border: 1px solid #f4c6dd88;
+    border-radius: 30px;
+    background: #ffffff10;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 70px #d28cb755;
+}
+
+.couple-names {
+    font-size: clamp(36px, 8vw, 65px);
+    color: #ffe2ed;
+    margin: 25px 0;
+    text-shadow: 0 0 25px #ff9ec9;
+}
+
+.ring {
+    font-size: 65px;
+    animation: heartbeat 2s infinite;
+}
+
+.couple-text {
+    color: #f5d4e8;
+    font-size: 17px;
+}
+
+.firework {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    box-shadow:
+        0 -45px #ffe2a9,
+        32px -32px #ff8fc4,
+        45px 0 #d4b2ff,
+        32px 32px #ffdf9f,
+        0 45px #ff8fc4,
+        -32px 32px #d4b2ff,
+        -45px 0 #ffdf9f,
+        -32px -32px #ff8fc4;
+    animation: fireworks 1.8s infinite;
+}
+
+@keyframes fireworks {
+    0%,100% { transform: scale(.3); opacity: .2; }
+    50% { transform: scale(1.3); opacity: 1; }
+}
+
+/* هدية المفاجأة - بحر إسكندرية */
+
+#seaPage {
+    background: linear-gradient(
+        to bottom,
+        #e6a7a7 0%,
+        #f5c8ae 25%,
+        #e9a8a6 45%,
+        #367f9d 46%,
+        #14516e 100%
+    );
+    color: white;
+}
+
+.sea-content {
+    position: relative;
+    z-index: 4;
+    max-width: 650px;
+    padding: 30px 20px;
+    border-radius: 25px;
+    background: #172c4770;
+    backdrop-filter: blur(8px);
+    border: 1px solid #ffffff55;
+}
+
+.sun {
+    position: absolute;
+    width: 95px;
+    height: 95px;
+    background: #ffe3ac;
+    border-radius: 50%;
+    top: 12%;
+    left: 15%;
+    box-shadow: 0 0 60px #ffe3ac;
+    animation: sunGlow 3s infinite alternate;
+}
+
+@keyframes sunGlow {
+    from { box-shadow: 0 0 35px #ffe3ac; }
+    to { box-shadow: 0 0 100px #ffe3ac; }
+}
+
+.sea {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 45%;
+    background: repeating-linear-gradient(
+        180deg,
+        #246e91 0px,
+        #246e91 18px,
+        #3488a7 20px,
+        #246e91 38px
+    );
+    opacity: .9;
+    animation: waves 7s linear infinite;
+}
+
+@keyframes waves {
+    from { transform: translateX(0); }
+    to { transform: translateX(50%); }
+}
+
+.sea-camera {
+    font-size: 65px;
+    margin: 15px;
+    animation: cameraMove 3s infinite alternate;
+}
+
+@keyframes cameraMove {
+    from { transform: rotate(-8deg) translateY(0); }
+    to { transform: rotate(8deg) translateY(-10px); }
+}
+
+/* الشهادة */
+
+.certificate {
+    background: linear-gradient(135deg, #fff5ec, #fce2ee);
+    color: #583752;
+    border: 5px double #c69b6c;
+    border-radius: 15px;
+    padding: 35px 20px;
+    margin-top: 25px;
+    box-shadow: 0 15px 60px #0005;
+}
+
+.certificate h2 {
+    color: #965b82;
+    font-size: 28px;
+}
+
+.certificate h1 {
+    color: #87466d;
+    font-size: 42px;
+}
+
+.certificate p {
+    color: #694d61;
+}
+
+.seal {
+    font-size: 55px;
+    margin-top: 15px;
+}
+
+/* الرسالة الأخيرة */
+
+.final-card {
+    max-width: 650px;
+    margin: auto;
+    padding: 40px 28px;
+    border-radius: 30px;
+    background: linear-gradient(145deg, #442c58, #271d3b);
+    border: 1px solid #e9bfd755;
+}
+
+.signature {
+    color: #f6bdd9;
+    margin-top: 25px;
+    font-size: 22px;
+}
+
+.floating {
+    position: fixed;
+    pointer-events: none;
+    z-index: 50;
+    animation: floatUp 3s ease forwards;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0) rotate(0); opacity: 1; }
+    100% { transform: translateY(-100vh) rotate(40deg); opacity: 0; }
+}
+
+footer {
+    color: #b6a2bf;
+    font-size: 12px;
+    margin-top: 35px;
+}
+
+@media(max-width:500px) {
+    .gifts { gap: 8px; }
+    .gift { padding: 18px 5px; }
+    .gift span { font-size: 38px; }
+    .choices { grid-template-columns: 1fr; }
+    .glass { padding: 27px 18px; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="stars"></div>
+
+<!-- البداية -->
+
+<section class="screen active" id="screen1">
+    <div class="container">
+
+        <div class="eyebrow">فيه حاجة مخصوص ليكي النهاردة ♡</div>
+
+        <div class="heart">♡</div>
+
+        <h1 class="gradient">
+            عالم صغير<br>
+            معمول لروان
+        </h1>
+
+        <p>
+            مش بعمل موقع لاى حد 
+            <br>
+            بس إنتِ تستاهلي النهاردة حاجة مختلفة شوية.
+        </p>
+
+        <button class="main-button" onclick="goTo(2)">
+            يلا نشوف المفاجأة ✨
+        </button>
+
+        <footer>من ريمو اللي بتحبك ♡</footer>
+    </div>
+</section>
+
+
+<!-- الرسالة -->
+
+<section class="screen" id="screen2">
+    <div class="container">
+
+        <div class="eyebrow">استني ياملكة </div>
+
+        <div class="big-emoji">💌</div>
+
+        <h1 class="gradient">يا روان!</h1>
+
+        <div class="glass message-card">
+
+            <p>
+                أنا عارفة إن امتحان النهاردة مضايقك،
+                وإنك كنتِ عايزة تحلي أحسن من كده.
+                <br><br>
+                بس بصراحة أنا مش مقتنعة إننا نسيب امتحان
+                واحد يبوظ يومك كله!
+                <br><br>
+                وبعدين أنا شايفة إنك محتاجة تفصلي شوية،
+                وتبطلي تفكري في الامتحان ده،
+                لأن عندنا حاجات أهم كتير نعملها.
+                <br><br>
+                وعشان أنا أختك الحنينة جداً 😂
+                قررت أعملك المفاجأة دي.
+                <br><br>
+                يلا بقى كمّلي، لسه مخلصناش!
+            </p>
+
+        </div>
+
+        <button class="main-button" onclick="goTo(3)">
+            كمّلي 😂
+        </button>
+
+    </div>
+</section>
+
+
+<!-- الاختبار -->
+
+<section class="screen" id="screen3">
+    <div class="container">
+
+        <div class="eyebrow">سؤال مهم جداً 😂</div>
+
+        <div class="glass">
+
+            <div class="big-emoji">🤔</div>
+
+            <h1 class="gradient">يا ترى يا روان؟</h1>
+
+            <p>لو تقدري تعملي حاجة واحدة دلوقتي، تختاري إيه؟</p>
+
+            <div class="choices">
+
+                <button class="choice" onclick="answer(1)">
+                    أنام وأنسى إن فيه امتحان أصلاً 😂
+                </button>
+
+                <button class="choice" onclick="answer(2)">
+                    أروح إسكندرية وأتصور بقى 🌊
+                </button>
+
+                <button class="choice" onclick="answer(3)">
+                    أختفي من العالم يومين 😂
+                </button>
+
+                <button class="choice" onclick="answer(4)">
+                    عايزة أكل 💗
+                </button>
+
+            </div>
+
+            <div id="gameResult"></div>
+
+        </div>
+
+        <button class="main-button" id="gameNext"
+        style="display:none" onclick="goTo(4)">
+            عندنا هدايا ليكي 🎁
+        </button>
+
+    </div>
+</section>
+
+
+<!-- اختيار الهدايا -->
+
+<section class="screen" id="screen4">
+    <div class="container">
+
+        <div class="eyebrow">ثلاث مفاجآت مخصوص ليكي</div>
+
+        <h1 class="gradient">اختاري هديتك يا روان</h1>
+
+        <p>كل واحدة فيهم حكاية لوحدها... افتحيهم كلهم! 💗</p>
+
+        <div class="gifts">
+
+            <button class="gift" onclick="openGift('lovePage')">
+                <span>🎁</span>
+                <p>هدية الحب</p>
+            </button>
+
+            <button class="gift" onclick="openGift('confidencePage')">
+                <span>💍</span>
+                <p>هدية الثقة</p>
+            </button>
+
+            <button class="gift" onclick="openGift('seaPage')">
+                <span>🌊</span>
+                <p>هدية المفاجأة</p>
+            </button>
+
+        </div>
+
+        <button class="main-button" onclick="goTo(5)">
+            استلمي شهادتك 👑
+        </button>
+
+    </div>
+</section>
+
+
+<!-- هدية الحب -->
+
+<div class="gift-page" id="lovePage">
+
+    <button class="back-button" onclick="closeGift()">← رجوع للهدايا</button>
+
+    <div class="love-center">💗</div>
+
+</div>
+
+
+<!-- هدية الثقة -->
+
+<div class="gift-page" id="confidencePage">
+
+    <button class="back-button" onclick="closeGift()">← رجوع للهدايا</button>
+
+    <div class="firework" style="top:20%;left:20%"></div>
+    <div class="firework" style="top:25%;right:20%;animation-delay:.5s"></div>
+    <div class="firework" style="bottom:20%;left:25%;animation-delay:1s"></div>
+    <div class="firework" style="bottom:20%;right:25%;animation-delay:.7s"></div>
+
+    <div class="couple-box">
+
+        <div style="font-size:55px">👑</div>
+
+        <p>في يوم من الأيام...</p>
+
+        <div class="couple-names">
+            روان ♡ فهد
+        </div>
+
+        <div class="ring">💍</div>
+
+        <p class="couple-text">
+            
+            ❤️
+        </p>
+
+        <div style="font-size:35px;margin-top:20px">
+            💗 ✨ 💗
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- هدية إسكندرية -->
+
+<div class="gift-page" id="seaPage">
+
+    <button class="back-button" onclick="closeGift()">← رجوع للهدايا</button>
+
+    <div class="sun"></div>
+    <div class="sea"></div>
+
+    <div class="sea-content">
+
+        <div class="sea-camera">📸</div>
+
+        <h1 style="color:#fff0d9;font-size:35px">
+            إسكندرية مستنياكي يا رورو 🌊
+        </h1>
+
+        <p style="color:white;font-size:19px;margin-top:20px">
+            عملتلك الموقع يا رورو عشان زعلك أهم من أي امتحانات
+        </p>
+
+        <p style="color:#ffe9d4;margin-top:20px">
+            خلصي امتحاناتك بقى، ونروح إسكندرية،
+            ونتمشى على البحر، ونتصور صور كتير،
+            وتفضلي تقولي على كل صورة:
+            دي أحلى واحدة 😂📸
+        </p>
+
+        <div style="font-size:38px;margin-top:20px">
+            🌊 ☀️ 📸
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- الشهادة -->
+
+<section class="screen" id="screen5">
+    <div class="container">
+
+        <div class="eyebrow">شهادة خاصة جداً</div>
+
+        <h1 class="gradient">شهادة روان الرسمية</h1>
+
+        <div class="certificate">
+
+            <div style="font-size:40px">✦ ✧ ✦</div>
+
+            <h2>شهادة الملكة</h2>
+
+            <p style="margin-top:20px">
+                تُمنح بكل الحب إلى
+            </p>
+
+            <h1>روان</h1>
+
+            <p>
+                عشان هي تستاهل كل حاجة حلوة،
+                وعشان وجودها في حياة الناس مهم 
+                
+                <br><br>
+                💗
+                
+                
+                <br><br>
+                
+            💗
+                
+            </p>
+
+            <div class="seal">👑</div>
+
+            <h3 style="color:#965b82;margin-top:10px">
+                الملكة روان
+            </h3>
+
+            <p style="font-size:12px;margin-top:15px">
+                معتمدة من ريمو
+            </p>
+
+        </div>
+
+        <button class="main-button" onclick="goTo(6)">
+            آخر حاجة ليكي 💌
+        </button>
+
+    </div>
+</section>
+
+
+<!-- الرسالة الأخيرة -->
+
+<section class="screen" id="screen6">
+    <div class="container">
+
+        <div class="eyebrow">قبل ما تمشي...</div>
+
+        <div class="final-card">
+
+            <div class="heart">💗</div>
+
+            <h1 class="gradient">روان حبيبتي</h1>
+
+            <p style="text-align:right;margin-top:25px">
+
+                ولا تزعلى نفسك فداكى الدنيا كلها مش امتحان بس 
+                <br><br>
+                <br><br>
+
+                ولسه هنخلص الامتحانات ونروح إسكندرية،
+                ونتصور صور كتير،
+                ونرجع نختار أحلى صورة فيهم 😂
+                <br><br>
+                ربنا يفرح قلبك يا رورو،
+                ويحققلك كل اللي نفسك فيه.
+                <br><br>
+
+                بحبك يا أحلى أخت ❤️
+
+            </p>
+
+            <div class="signature">
+                من أختك اللي بتحبك أوي ♡
+            </div>
+
+        </div>
+
+        <button class="main-button" onclick="celebrate()">
+            اضغطي هنا لو المفاجأة عجبتك 💗
+        </button>
+
+        <div id="finalMessage" style="margin-top:30px"></div>
+
+    </div>
+</section>
+
+
+<script>
+
+// النجوم
+
+const stars = document.getElementById("stars");
+
+for(let i = 0; i < 90; i++) {
+
+    const star = document.createElement("span");
+
+    star.className = "star";
+    star.innerHTML = Math.random() > .5 ? "✦" : "·";
+
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+    star.style.fontSize = (Math.random() * 15 + 5) + "px";
+    star.style.animationDelay = Math.random() * 3 + "s";
+
+    stars.appendChild(star);
+}
+
+
+// التنقل بين الصفحات
+
+function goTo(number) {
+
+    document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.remove("active");
+    });
+
+    document.getElementById("screen" + number).classList.add("active");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+// الاختبار
+
+function answer(choice) {
+
+    const result = document.getElementById("gameResult");
+
+    const messages = {
+
+        1: "اختيار منطقي جداً 😂 بس نامي بعد ما تخلصي المفاجأة!",
+
+        2: "كنت عارفة! إسكندرية والصور الحلوة دول قصة حب لوحدهم 🌊📸",
+
+        3: "اختفاء مؤقت ولا يهمك، بس متنسيش تاخدينا معاكي 😂",
+
+        4: "وده المطلوب بالظبط! عايزين روان مبسوطة وبس 💗"
+
+    };
+
+    result.innerHTML = messages[choice];
+
+    document.getElementById("gameNext").style.display = "inline-block";
+
+    celebrateHearts();
+}
+
+
+// فتح صفحات الهدايا
+
+function openGift(pageId) {
+
+    document.getElementById(pageId).classList.add("active");
+
+    if(pageId === "lovePage") {
+        startLove();
+    }
+
+    if(pageId === "confidencePage") {
+        celebrateHearts();
+    }
+
+}
+
+function closeGift() {
+
+    document.querySelectorAll(".gift-page").forEach(page => {
+        page.classList.remove("active");
+    });
+
+}
+
+
+// قلوب هدية الحب
+
+let loveInterval;
+
+function startLove() {
+
+    const page = document.getElementById("lovePage");
+
+    clearInterval(loveInterval);
+
+    function createLove() {
+
+        if(!page.classList.contains("active")) return;
+
+        const heart = document.createElement("div");
+
+        heart.className = "love-heart";
+
+        const emojis = ["💗","💕","💖","💘","❤️","💝","🌸"];
+
+        heart.innerHTML = emojis[
+            Math.floor(Math.random() * emojis.length)
+        ];
+
+        heart.style.left = Math.random() * 100 + "%";
+        heart.style.fontSize = (Math.random() * 35 + 18) + "px";
+        heart.style.animationDuration = (Math.random() * 4 + 3) + "s";
+
+        page.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 7000);
+    }
+
+    for(let i = 0; i < 25; i++) {
+        setTimeout(createLove, i * 100);
+    }
+
+    loveInterval = setInterval(createLove, 250);
+}
+
+
+// القلوب والمفرقعات
+
+function celebrateHearts() {
+
+    const emojis = ["💗","✨","💕","🌸","⭐","💖","🎉"];
+
+    for(let i = 0; i < 40; i++) {
+
+        const item = document.createElement("div");
+
+        item.className = "floating";
+
+        item.innerHTML = emojis[
+            Math.floor(Math.random() * emojis.length)
+        ];
+
+        item.style.left = Math.random() * 100 + "vw";
+        item.style.bottom = "-30px";
+        item.style.fontSize = (Math.random() * 25 + 15) + "px";
+        item.style.animationDuration = (Math.random() * 2 + 2) + "s";
+
+        document.body.appendChild(item);
+
+        setTimeout(() => item.remove(), 4000);
+    }
+}
+
+
+// المفاجأة الأخيرة
+
+function celebrate() {
+
+    celebrateHearts();
+
+    document.getElementById("finalMessage").innerHTML =
+
+    "<h1 class='gradient'>الملكة روان مبسوطة 👑💗</h1>" +
+
+    "<p style='font-size:19px'>أحلى حاجة في الدنيا إنك تكوني مبسوطة يا رورو 🥹</p>" +
+
+    "<p> فداكى الدنيا كلها مش بس امتحان❤️</p>";
+
+}
+
+</script>
+
+</body>
+</html>
+
